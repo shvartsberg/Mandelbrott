@@ -10,4 +10,6 @@
 
     <context:component-scan base-package="rest" />
 
+    <bean name="colorManager" class="rest.AnotherColorManager" />
+
 </beans>

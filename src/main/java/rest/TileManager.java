@@ -1,6 +1,7 @@
 package rest;
 
 import mandelbrott.Block;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -13,6 +14,9 @@ import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
 @Service
 public class TileManager {
+
+    @Autowired
+    ColorManager colorManager;
 
     public final int TILE_SIZE = 256;
     public final double XLEFT = -2.5;
@@ -72,7 +76,7 @@ public class TileManager {
 
         for (int ix = 0; ix < TILE_SIZE; ix++) {
             for (int iy = 0; iy < TILE_SIZE; iy++) {
-                graphics.setColor(getColor(b.points[ix][iy].getCnt()));
+                graphics.setColor(colorManager.getColor(b.points[ix][iy].getCnt()));
                 graphics.drawLine(ix, TILE_SIZE - iy - 1, ix, TILE_SIZE - iy);
             }
         }
@@ -83,16 +87,7 @@ public class TileManager {
         return  image2byte(image);
     }
 
-    public final int ccc = 8;
-    public Color getColor (int cnt) {
-        int r = (cnt % ccc) * (256/ccc);
-        cnt = cnt / ccc;
-        int g = (cnt % ccc) * (256/ccc);
-        cnt = cnt / ccc;
-        int b = cnt * (256/ccc);
 
-        return new Color (r, g, b);
-    }
 
     public byte[] image2byte(BufferedImage image) throws IOException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
