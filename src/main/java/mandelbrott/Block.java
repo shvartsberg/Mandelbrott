@@ -1,5 +1,7 @@
 package mandelbrott;
 
+import org.springframework.util.StopWatch;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -26,6 +28,10 @@ public class Block implements Serializable {
     }
 
     public int calc(int maxiteration) {
+
+        StopWatch w = new StopWatch();
+        w.start();
+
         int cnt = 0;
 
         for (int i = 0; i < width; i++) {
@@ -34,6 +40,10 @@ public class Block implements Serializable {
                 cnt += p.iterate(maxiteration);
             }
         }
+
+        w.stop();
+
+        System.out.println(w.getTotalTimeMillis() + " " + Thread.currentThread().getName());
 
         return cnt;
     }

@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/tiles")
-public class tilesSpring {
+public class TilesController {
 
     @Autowired
     TileManager tileManager;
@@ -18,9 +18,6 @@ public class tilesSpring {
     String hello() {
         return "future map!";
     }
-
- //   @GET
- //   @Produces("image/png")
 
     @RequestMapping(value="/{z}/{x}/{y}", produces = {"image/png"})
     public byte[] getTile(@PathVariable("z") int z, @PathVariable("x") long x, @PathVariable("y") long y) throws IOException {

@@ -1,6 +1,5 @@
 package rest;
 
-import app.MandelbrotProperties;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +12,7 @@ import java.awt.*;
 @DependsOn("mandelbrotProperties")
 public class BasicColorManager implements ColorManager {
 
-    /**
-     * number of colors per channel
-     */
-    public final int ccc = (int)Math.round(Math.pow(MandelbrotProperties.getMaxIteration(), 1/3));
+    public final int ccc = 8;
 
     @Override
     public Color getColor (int cnt) {
