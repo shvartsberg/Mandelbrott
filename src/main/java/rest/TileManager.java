@@ -1,7 +1,9 @@
 package rest;
 
+import app.MandelbrotProperties;
 import mandelbrott.Block;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -13,12 +15,13 @@ import java.io.IOException;
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
 @Service
+@DependsOn({"mandelbrotProperties"})
 public class TileManager {
 
     @Autowired
     ColorManager colorManager;
 
-    public final int TILE_SIZE = 256;
+    public final int TILE_SIZE = MandelbrotProperties.getTileSize();
     public final double XLEFT = -2.5;
     public final double YTOP = 2;
 
@@ -57,8 +60,6 @@ public class TileManager {
         BufferedImage image = new BufferedImage(TILE_SIZE, TILE_SIZE, TYPE_INT_ARGB);
         Graphics2D graphics = image.createGraphics();
 
-      //  graphics.setColor(new Color(255, 0, 0));
-
         double delt = delta(z);
         double dd = delt / TILE_SIZE;
 
@@ -69,7 +70,7 @@ public class TileManager {
         double yyy = yy - delt + dd;
 
         Block b = new Block(xx, yyy, dd, TILE_SIZE);
-        b.calc(510);
+        b.calc(MandelbrotProperties.getMaxIteration());
 
       //  graphics.setColor(new Color(128, 128, 128));
       //  graphics.drawRect(0, 0, 255, 255);

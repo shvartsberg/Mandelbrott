@@ -1,5 +1,7 @@
 package rest;
 
+import app.MandelbrotProperties;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import java.awt.*;
@@ -8,9 +10,13 @@ import java.awt.*;
  * 8 bit per color, 8*8*8 different colors
  */
 @Service
+@DependsOn("mandelbrotProperties")
 public class BasicColorManager implements ColorManager {
 
-    public final int ccc = 8;
+    /**
+     * number of colors per channel
+     */
+    public final int ccc = (int)Math.round(Math.pow(MandelbrotProperties.getMaxIteration(), 1/3));
 
     @Override
     public Color getColor (int cnt) {
