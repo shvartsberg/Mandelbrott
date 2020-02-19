@@ -11,17 +11,4 @@ import javax.sql.DataSource;
 
 @Configuration
 public class AppConfig {
-    @Autowired
-    DataSourceProperties dataSourceProperties;
-
-    @Bean
-    DataSource dataSource() {
-        DataSource dataSource = DataSourceBuilder
-                .create(this.dataSourceProperties.getClassLoader())
-                .url(this.dataSourceProperties.getUrl())
-                .username(this.dataSourceProperties.getUsername())
-                .password(this.dataSourceProperties.getPassword())
-                .build();
-        return new DataSourceSpy(dataSource);
-    }
 }
