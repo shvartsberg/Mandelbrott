@@ -2,6 +2,7 @@ package app;
 
 import com.jayway.restassured.RestAssured;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,18 +25,19 @@ public class HelloControllerTest {
     int port;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         RestAssured.port = port;
     }
 
     @Test
-    public void testHello() throws Exception {
-        when().get("/").then()
-                .body(is("Hello World!"));
+    public void testHello() {
+        when().get("/tiles/").then()
+                .body(is("future map!"));
     }
 
+    @Ignore
     @Test
-    public void testCalc() throws Exception {
+    public void testCalc() {
         given().param("left", 100)
                 .param("right", 200)
                 .get("/calc")

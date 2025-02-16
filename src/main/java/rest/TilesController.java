@@ -6,10 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/tiles")
 public class TilesController {
+
+    Logger log = Logger.getLogger("TileManager");
 
     @Autowired
     TileManager tileManager;
@@ -21,6 +24,7 @@ public class TilesController {
 
     @RequestMapping(value="/{z}/{x}/{y}", produces = {"image/png"})
     public byte[] getTile(@PathVariable("z") int z, @PathVariable("x") long x, @PathVariable("y") long y) throws IOException {
+        log.info(String.format("z=%s x=%s y=%s", z, x, y));
         return tileManager.getTile(z, x, y);
     }
 }

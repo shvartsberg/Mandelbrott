@@ -11,12 +11,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.logging.Logger;
 
 import static java.awt.image.BufferedImage.TYPE_INT_ARGB;
 
 @Service
 @DependsOn({"mandelbrotProperties"})
 public class TileManager {
+
+    Logger log = Logger.getLogger("TileManager");
 
     @Autowired
     ColorManager colorManager;
@@ -30,6 +33,7 @@ public class TileManager {
     }
 
     public byte[] getTextCoordTile(int z, int x, int y) throws IOException {
+        log.info(String.format("z=%s x=%s y=%s", z, x, y));
         BufferedImage image = new BufferedImage(TILE_SIZE, TILE_SIZE, TYPE_INT_ARGB);
         Graphics2D graphics = image.createGraphics();
 
@@ -60,14 +64,14 @@ public class TileManager {
         BufferedImage image = new BufferedImage(TILE_SIZE, TILE_SIZE, TYPE_INT_ARGB);
         Graphics2D graphics = image.createGraphics();
 
-        double delt = delta(z);
-        double dd = delt / TILE_SIZE;
+        double delt = delta(z);         // размер блока
+        double dd = delt / TILE_SIZE;   // размер точки
 
-        double xx = delta(z) * x + XLEFT;
-        double xxx = xx + delt - dd;
+        double xx = delta(z) * x + XLEFT;   // координата X левой точки блока
+        double xxx = xx + delt - dd;        // координата X правой точки блока
 
-        double yy = YTOP - delta(z) * y;
-        double yyy = yy - delt + dd;
+        double yy = YTOP - delta(z) * y;    // координата Y верхней точки блока
+        double yyy = yy - delt + dd;        // координата Y нижней точки блока
 
         Block b = new Block(xx, yyy, dd, TILE_SIZE);
         b.calc(MandelbrotProperties.getMaxIteration());

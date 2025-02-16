@@ -2,12 +2,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>11</groupId>
-    <artifactId>11</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>shvarz</groupId>
+    <artifactId>Mandelbrott</artifactId>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>Spring Boot Blank Project (from https://github.com/making/spring-boot-blank)</name>
+    <name>Mandelbrott set</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
